@@ -71,7 +71,9 @@ int main() {
     inputMatrix(matrix, size);
     inputVector(b, size);
     gaussianElimination(matrix, b, x, size);
+    cout << "Решение СЛАУ: ";
     outputVector(x);
+ 
 
     return 0;
 }
