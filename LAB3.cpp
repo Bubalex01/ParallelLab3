@@ -4,7 +4,7 @@
 
 using namespace std;
 
-
+// Функция для ввода матрицы
 void inputMatrix(vector<vector<double>>& matrix, int size) {
     for (int i = 0; i < size; i++) {
         matrix.push_back(vector<double>());
@@ -17,6 +17,7 @@ void inputMatrix(vector<vector<double>>& matrix, int size) {
     }
 }
 
+// Функция для ввода вектора правой части
 void inputVector(vector<double>& b, int size) {
     for (int i = 0; i < size; i++) {
         double value;
@@ -26,7 +27,7 @@ void inputVector(vector<double>& b, int size) {
     }
 }
 
-
+// Функция для вывода вектора
 void outputVector(const vector<double>& vec) {
     for (double value : vec) {
         cout << value << " ";
@@ -34,8 +35,9 @@ void outputVector(const vector<double>& vec) {
     cout << endl;
 }
 
-
+// Функция для решения СЛАУ методом Гаусса
 void gaussianElimination(vector<vector<double>>& matrix, vector<double>& b, vector<double>& x, int size) {
+    // Прямой ход метода Гаусса для получения верхней треугольной матрицы
     for (int k = 0; k < size - 1; k++) {
 #pragma omp parallel for 
         for (int i = k + 1; i < size; i++) {
@@ -47,6 +49,7 @@ void gaussianElimination(vector<vector<double>>& matrix, vector<double>& b, vect
         }
     }
 
+    // Обратный ход метода Гаусса для нахождения неизвестных 
     for (int i = size - 1; i >= 0; i--) {
         x[i] = b[i];
         for (int j = i + 1; j < size; j++) {
