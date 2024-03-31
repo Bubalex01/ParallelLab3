@@ -37,6 +37,7 @@ void outputVector(const vector<double>& vec) {
 
 void gaussianElimination(vector<vector<double>>& matrix, vector<double>& b, vector<double>& x, int size) {
     for (int k = 0; k < size - 1; k++) {
+#pragma omp parallel for 
         for (int i = k + 1; i < size; i++) {
             double factor = matrix[i][k] / matrix[k][k];
             for (int j = k; j < size; j++) {
