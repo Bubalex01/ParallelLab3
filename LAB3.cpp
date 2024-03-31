@@ -17,6 +17,17 @@ void inputMatrix(vector<vector<double>>& matrix, int size) {
     }
 }
 
+//Функция для вывода матрицы
+void outputMatrix(vector<vector<double>>& matrix, int size) {
+    cout << endl;
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            cout << matrix[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
 // Функция для ввода вектора правой части
 void inputVector(vector<double>& b, int size) {
     for (int i = 0; i < size; i++) {
@@ -44,6 +55,7 @@ void gaussianElimination(vector<vector<double>>& matrix, vector<double>& b, vect
             double factor = matrix[i][k] / matrix[k][k];
             for (int j = k; j < size; j++) {
                 matrix[i][j] -= factor * matrix[k][j];
+                //outputMatrix(matrix, size);
             }
             b[i] -= factor * b[k];
         }
@@ -60,6 +72,7 @@ void gaussianElimination(vector<vector<double>>& matrix, vector<double>& b, vect
 }
 
 int main() {
+    setlocale(LC_ALL, "Russian");
     int size;
     cout << "Введите размер матрицы: ";
     cin >> size;
@@ -71,9 +84,9 @@ int main() {
     inputMatrix(matrix, size);
     inputVector(b, size);
     gaussianElimination(matrix, b, x, size);
+    outputMatrix(matrix,size);
     cout << "Решение СЛАУ: ";
     outputVector(x);
- 
 
     return 0;
 }
