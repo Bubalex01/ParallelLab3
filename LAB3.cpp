@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <vector>
 #include <omp.h>
+#include <chrono>
 
 using namespace std;
 
@@ -55,7 +56,7 @@ void gaussianElimination(vector<vector<double>>& matrix, vector<double>& b, vect
             double factor = matrix[i][k] / matrix[k][k];
             for (int j = k; j < size; j++) {
                 matrix[i][j] -= factor * matrix[k][j];
-                //outputMatrix(matrix, size);
+                outputMatrix(matrix, size);
             }
             b[i] -= factor * b[k];
         }
@@ -83,10 +84,16 @@ int main() {
 
     inputMatrix(matrix, size);
     inputVector(b, size);
+    auto start = chrono::high_resolution_clock::now();
     gaussianElimination(matrix, b, x, size);
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double> time_elapsed = end - start;
+    
+
     outputMatrix(matrix,size);
     cout << "Решение СЛАУ: ";
     outputVector(x);
+    cout << "Время:" << time_elapsed.count();
 
     return 0;
 }
